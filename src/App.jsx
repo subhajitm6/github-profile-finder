@@ -160,6 +160,13 @@ export default function App() {
     }
   };
 
+  const handleResetSearch = () => {
+    setError(null);
+    setProfile(null);
+    setRepos([]);
+    setLastSearched('');
+  };
+
   // Derive available languages from loaded repos
   const availableLanguages = Array.from(
     new Set(repos.map((r) => r.language).filter(Boolean))
@@ -199,7 +206,13 @@ export default function App() {
                   {isLoading && <LoadingState />}
 
                   {!isLoading && error && (
-                    <ErrorState message={error} onRetry={handleRetry} />
+                    <ErrorState
+                      message={error}
+                      searchedUsername={lastSearched}
+                      onRetry={handleRetry}
+                      onReset={handleResetSearch}
+                      onSelectPreset={handleSearch}
+                    />
                   )}
 
                   {!isLoading && !error && profile && (

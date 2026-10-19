@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Search, X } from 'lucide-react';
+import { sanitizeUsername } from '../services/githubApi';
 
 export default function SearchForm({ onSearch, isLoading = false }) {
   const [username, setUsername] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const trimmed = username.trim();
-    if (trimmed && !isLoading && onSearch) {
-      onSearch(trimmed);
+    const clean = sanitizeUsername(username);
+    if (clean && !isLoading && onSearch) {
+      onSearch(clean);
     }
   };
 
@@ -32,7 +33,7 @@ export default function SearchForm({ onSearch, isLoading = false }) {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter a GitHub username..."
+          placeholder="Enter a GitHub username (e.g. subhajitm6, torvalds)..."
           disabled={isLoading}
           autoComplete="off"
           spellCheck="false"

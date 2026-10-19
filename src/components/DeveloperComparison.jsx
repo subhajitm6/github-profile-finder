@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Users2, ArrowRightLeft, Star, GitFork, BookOpen, AlertCircle, Loader2, Sparkles, ExternalLink } from 'lucide-react';
-import { fetchUserAndRepos } from '../services/githubApi';
+import { fetchUserAndRepos, sanitizeUsername } from '../services/githubApi';
 import { formatCompactNumber } from '../utils/formatters';
 
 export default function DeveloperComparison() {
@@ -40,8 +40,8 @@ export default function DeveloperComparison() {
 
   const handleCompare = async (e) => {
     if (e) e.preventDefault();
-    const u1 = user1.trim();
-    const u2 = user2.trim();
+    const u1 = sanitizeUsername(user1);
+    const u2 = sanitizeUsername(user2);
 
     if (!u1 || !u2 || isLoading) return;
 

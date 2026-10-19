@@ -8,22 +8,46 @@
 
 const BASE_URL = 'https://api.github.com';
 
+export function sanitizeUsername(input) {
+  if (!input || typeof input !== 'string') return '';
+  let clean = input.trim();
+
+  // Strip full or partial GitHub URLs (e.g. https://github.com/subhajitm6 or github.com/subhajitm6/repo)
+  clean = clean.replace(/^(?:https?:\/\/)?(?:www\.)?github\.com\//i, '');
+
+  // Strip leading and trailing slashes
+  clean = clean.replace(/^\/+|\/+$/g, '');
+
+  // If path format like username/repo, extract the username
+  if (clean.includes('/')) {
+    clean = clean.split('/')[0];
+  }
+
+  // Strip leading '@' or other common prefixes
+  clean = clean.replace(/^[@#]+/, '');
+
+  return clean.trim();
+}
+
 /**
  * Handle HTTP error responses cleanly.
  */
-async function handleResponse(response) {
+async function handleResponse(response, username = '') {
   if (response.ok) {
     return await response.json();
   }
 
   if (response.status === 404) {
-    const error = new Error('User not found. Please check the username and try again.');
+    const userHint = username ? ` "${username}"` : '';
+    const error = new Error(
+      `User${userHint} not found. Please make sure to search for a GitHub user handle (e.g. subhajitm6, torvalds) rather than a repository name or URL.`
+    );
     error.status = 404;
     throw error;
   }
 
   if (response.status === 403 || response.status === 429) {
-    const error = new Error('GitHub API rate limit exceeded. Please wait a while or try again later.');
+    const error = new Error('GitHub API rate limit reached (60 requests/hour unauthenticated). Please wait a few moments or try again later.');
     error.status = response.status;
     throw error;
   }
@@ -39,7 +63,13 @@ async function handleResponse(response) {
  * @returns {Promise<Object>}
  */
 export async function fetchUserProfile(username) {
-  const cleanUsername = encodeURIComponent(username.trim());
+  const sanitized = sanitizeUsername(username);
+  if (!sanitized) {
+    const error = new Error('Please enter a valid GitHub username.');
+    error.status = 400;
+    throw error;
+  }
+  const cleanUsername = encodeURIComponent(sanitized);
   const url = `${BASE_URL}/users/${cleanUsername}`;
 
   try {
@@ -48,7 +78,7 @@ export async function fetchUserProfile(username) {
         Accept: 'application/vnd.github.v3+json',
       },
     });
-    return await handleResponse(response);
+    return await handleResponse(response, sanitized);
   } catch (err) {
     if (err.status) throw err;
     const networkError = new Error('Unable to connect to GitHub. Please check your internet connection.');
@@ -65,7 +95,11 @@ export async function fetchUserProfile(username) {
  * @returns {Promise<Array>}
  */
 export async function fetchUserRepos(username, page = 1, perPage = 30) {
-  const cleanUsername = encodeURIComponent(username.trim());
+  const sanitized = sanitizeUsername(username);
+  if (!sanitized) {
+    return [];
+  }
+  const cleanUsername = encodeURIComponent(sanitized);
   const url = `${BASE_URL}/users/${cleanUsername}/repos?sort=updated&per_page=${perPage}&page=${page}`;
 
   try {
@@ -74,7 +108,7 @@ export async function fetchUserRepos(username, page = 1, perPage = 30) {
         Accept: 'application/vnd.github.v3+json',
       },
     });
-    return await handleResponse(response);
+    return await handleResponse(response, sanitized);
   } catch (err) {
     if (err.status) throw err;
     const networkError = new Error('Unable to fetch repositories from GitHub.');

@@ -2,7 +2,7 @@ import React from 'react';
 import { UserCheck, Sparkles } from 'lucide-react';
 
 export default function EmptyState({ onSelectPreset }) {
-  const suggestions = ['torvalds', 'gaearon', 'shadcn', 'facebook'];
+  const suggestions = ['subhajitm6', 'torvalds', 'gaearon', 'shadcn', 'facebook'];
 
   return (
     <div className="mx-auto my-12 max-w-lg rounded-2xl border border-dashed border-slate-200 bg-white/60 p-8 text-center backdrop-blur-sm sm:p-12 dark:border-[#30363D] dark:bg-[#161B22]/60">
