@@ -38,12 +38,12 @@ export default function ErrorState({ message, searchedUsername, onRetry, onReset
         </div>
       )}
 
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+      <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3">
         {onRetry && (
           <button
             type="button"
             onClick={onRetry}
-            className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-slate-800 dark:bg-[#238636] dark:hover:bg-[#2ea043]"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 sm:py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-slate-800 dark:bg-[#238636] dark:hover:bg-[#2ea043] cursor-pointer"
           >
             <RefreshCw className="h-3.5 w-3.5" />
             <span>Try again</span>
@@ -54,7 +54,7 @@ export default function ErrorState({ message, searchedUsername, onRetry, onReset
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-xs transition hover:bg-slate-100 dark:border-[#30363D] dark:bg-[#21262D] dark:text-[#E6EDF3] dark:hover:bg-[#30363D]"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 sm:py-2 text-xs font-semibold text-slate-700 shadow-xs transition hover:bg-slate-100 dark:border-[#30363D] dark:bg-[#21262D] dark:text-[#E6EDF3] dark:hover:bg-[#30363D] cursor-pointer"
           >
             <Home className="h-3.5 w-3.5" />
             <span>Back to search</span>

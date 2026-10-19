@@ -31,15 +31,15 @@ export default function RecentSearches({ searches = [], onSelect, onClear, onRem
         {searches.map((username) => (
           <div
             key={username}
-            className="group inline-flex items-center rounded-lg border border-slate-200/80 bg-white/70 text-xs text-slate-700 shadow-2xs transition hover:border-blue-400 hover:bg-blue-50/50 hover:text-blue-600 dark:border-[#30363D] dark:bg-[#161B22] dark:text-[#E6EDF3] dark:hover:border-[#58A6FF] dark:hover:bg-[#21262D]"
+            className="group inline-flex items-center rounded-lg border border-slate-200/80 bg-white/70 text-xs text-slate-700 shadow-2xs transition hover:border-blue-400 hover:bg-blue-50/50 hover:text-blue-600 dark:border-[#30363D] dark:bg-[#161B22] dark:text-[#E6EDF3] dark:hover:border-[#58A6FF] dark:hover:bg-[#21262D] max-w-full"
           >
             <button
               type="button"
               onClick={() => onSelect(username)}
-              className="inline-flex items-center gap-1 py-1 pl-2.5 pr-1.5 cursor-pointer"
+              className="inline-flex items-center gap-1 py-1 pl-2.5 pr-1.5 cursor-pointer min-w-0"
             >
-              <span>@{username}</span>
-              <ArrowUpRight className="h-3 w-3 opacity-0 transition group-hover:opacity-100 text-blue-500 dark:text-[#58A6FF]" />
+              <span className="truncate max-w-[140px] sm:max-w-[200px]">@{username}</span>
+              <ArrowUpRight className="h-3 w-3 opacity-0 transition group-hover:opacity-100 text-blue-500 dark:text-[#58A6FF] shrink-0" />
             </button>
             {onRemove && (
               <button

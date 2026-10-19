@@ -78,38 +78,40 @@ export default function RepositoryCard({ repo }) {
       </div>
 
       {/* Footer / Meta */}
-      <div className="mt-4 flex flex-wrap items-center gap-3.5 border-t border-slate-100 pt-3 text-xs text-slate-500 dark:border-[#30363D] dark:text-[#9198A1]">
-        {/* Primary Language */}
-        {language && (
-          <div className="flex items-center gap-1.5">
-            <span className={`h-2.5 w-2.5 rounded-full ${langColor}`} />
-            <span>{language}</span>
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-y-2 gap-x-3 border-t border-slate-100 pt-3 text-xs text-slate-500 dark:border-[#30363D] dark:text-[#9198A1]">
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Primary Language */}
+          {language && (
+            <div className="flex items-center gap-1.5 shrink-0">
+              <span className={`h-2.5 w-2.5 rounded-full ${langColor}`} />
+              <span>{language}</span>
+            </div>
+          )}
+
+          {/* Stars */}
+          <div className="flex items-center gap-1 shrink-0" title={`${stargazers_count ?? 0} stars`}>
+            <Star className="h-3.5 w-3.5 text-amber-500" />
+            <span>{formatCompactNumber(stargazers_count)}</span>
           </div>
-        )}
 
-        {/* Stars */}
-        <div className="flex items-center gap-1" title={`${stargazers_count ?? 0} stars`}>
-          <Star className="h-3.5 w-3.5 text-amber-500" />
-          <span>{formatCompactNumber(stargazers_count)}</span>
-        </div>
-
-        {/* Forks */}
-        <div className="flex items-center gap-1" title={`${forks_count ?? 0} forks`}>
-          <GitFork className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
-          <span>{formatCompactNumber(forks_count)}</span>
-        </div>
-
-        {/* Open Issues */}
-        {typeof open_issues_count === 'number' && open_issues_count > 0 && (
-          <div className="flex items-center gap-1" title={`${open_issues_count} open issues`}>
-            <AlertCircle className="h-3.5 w-3.5 text-rose-500/80" />
-            <span>{formatCompactNumber(open_issues_count)}</span>
+          {/* Forks */}
+          <div className="flex items-center gap-1 shrink-0" title={`${forks_count ?? 0} forks`}>
+            <GitFork className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
+            <span>{formatCompactNumber(forks_count)}</span>
           </div>
-        )}
+
+          {/* Open Issues */}
+          {typeof open_issues_count === 'number' && open_issues_count > 0 && (
+            <div className="flex items-center gap-1 shrink-0" title={`${open_issues_count} open issues`}>
+              <AlertCircle className="h-3.5 w-3.5 text-rose-500/80" />
+              <span>{formatCompactNumber(open_issues_count)}</span>
+            </div>
+          )}
+        </div>
 
         {/* Updated At */}
         {updated_at && (
-          <div className="ml-auto text-[11px] text-slate-400 dark:text-[#9198A1]">
+          <div className="text-[11px] text-slate-400 dark:text-[#9198A1] shrink-0">
             Updated {formatDate(updated_at)}
           </div>
         )}

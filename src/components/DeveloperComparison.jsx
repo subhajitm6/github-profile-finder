@@ -190,16 +190,16 @@ export default function DeveloperComparison() {
             </p>
             <div className="mt-2 space-y-1.5">
               {repos.slice(0, 3).map((r) => (
-                <div key={r.id} className="flex items-center justify-between text-xs">
+                <div key={r.id} className="flex items-center justify-between gap-2 text-xs">
                   <a
                     href={r.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="truncate max-w-[180px] font-medium text-slate-800 hover:text-blue-600 dark:text-[#E6EDF3] dark:hover:text-[#58A6FF]"
+                    className="truncate min-w-0 flex-1 font-medium text-slate-800 hover:text-blue-600 dark:text-[#E6EDF3] dark:hover:text-[#58A6FF]"
                   >
                     {r.name}
                   </a>
-                  <span className="text-[11px] text-slate-400 flex items-center gap-0.5">
+                  <span className="text-[11px] text-slate-400 flex items-center gap-0.5 shrink-0">
                     <Star className="h-3 w-3 text-amber-500 inline" />
                     {r.stargazers_count}
                   </span>
@@ -217,12 +217,12 @@ export default function DeveloperComparison() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl space-y-8">
+    <div className="mx-auto max-w-6xl space-y-6 sm:space-y-8">
       {/* Compare Form */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-[#30363D] dark:bg-[#161B22] sm:p-8">
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-8 shadow-sm dark:border-[#30363D] dark:bg-[#161B22]">
         <div className="flex items-center gap-2">
-          <ArrowRightLeft className="h-5 w-5 text-blue-600 dark:text-[#58A6FF]" />
-          <h3 className="text-lg font-bold text-slate-900 dark:text-[#E6EDF3]">
+          <ArrowRightLeft className="h-5 w-5 text-blue-600 dark:text-[#58A6FF] shrink-0" />
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-[#E6EDF3]">
             Developer Head-to-Head Comparison
           </h3>
         </div>
@@ -230,40 +230,40 @@ export default function DeveloperComparison() {
           Compare followers, public repositories, language distribution, and stars between any two GitHub developers.
         </p>
 
-        <form onSubmit={handleCompare} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <div className="flex-1">
+        <form onSubmit={handleCompare} className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="flex-1 min-w-0">
             <label htmlFor="user1-input" className="sr-only">First developer</label>
             <input
               id="user1-input"
               type="text"
               value={user1}
               onChange={(e) => setUser1(e.target.value)}
-              placeholder="Developer 1"
-              className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:border-[#30363D] dark:bg-[#21262D] dark:text-[#E6EDF3]"
+              placeholder="Developer 1 (e.g. torvalds)"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs sm:text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:border-[#30363D] dark:bg-[#21262D] dark:text-[#E6EDF3]"
             />
           </div>
 
-          <span className="text-center text-xs font-bold text-slate-400 sm:px-2">VS</span>
+          <span className="text-center text-xs font-bold text-slate-400 sm:px-1 shrink-0">VS</span>
 
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <label htmlFor="user2-input" className="sr-only">Second developer</label>
             <input
               id="user2-input"
               type="text"
               value={user2}
               onChange={(e) => setUser2(e.target.value)}
-              placeholder="Developer 2"
-              className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:border-[#30363D] dark:bg-[#21262D] dark:text-[#E6EDF3]"
+              placeholder="Developer 2 (e.g. gaearon)"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs sm:text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:border-[#30363D] dark:bg-[#21262D] dark:text-[#E6EDF3]"
             />
           </div>
 
           <button
             type="submit"
             disabled={!user1.trim() || !user2.trim() || isLoading}
-            className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700 disabled:opacity-50 dark:bg-[#1F6FEB] dark:hover:bg-blue-600"
+            className="w-full sm:w-auto flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 disabled:opacity-50 dark:bg-[#1F6FEB] dark:hover:bg-blue-600 cursor-pointer"
           >
             {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowRightLeft className="h-4 w-4" />}
-            <span>Compare Developers</span>
+            <span>Compare</span>
           </button>
         </form>
       </div>

@@ -34,22 +34,22 @@ export default function ProfileStats({ reposCount, followersCount, followingCoun
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+    <div className="grid grid-cols-3 gap-2 sm:gap-3.5">
       {stats.map((stat) => {
         const Icon = stat.icon;
         return (
           <div
             key={stat.id}
-            className="flex items-center gap-3.5 rounded-xl border border-slate-200/80 bg-slate-50/60 p-3.5 transition hover:bg-slate-50 dark:border-[#30363D] dark:bg-[#21262D]/60 dark:hover:bg-[#21262D]"
+            className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-3.5 rounded-xl border border-slate-200/80 bg-slate-50/60 p-2.5 sm:p-3.5 text-center sm:text-left transition hover:bg-slate-50 dark:border-[#30363D] dark:bg-[#21262D]/60 dark:hover:bg-[#21262D]"
           >
-            <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${stat.bgColor} ${stat.color}`}>
-              <Icon className="h-5 w-5" />
+            <div className={`flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg ${stat.bgColor} ${stat.color}`}>
+              <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
-            <div>
-              <p className="text-xl font-bold tracking-tight text-slate-900 dark:text-[#E6EDF3]" title={stat.raw.toLocaleString()}>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm sm:text-xl font-bold tracking-tight text-slate-900 truncate dark:text-[#E6EDF3]" title={stat.raw.toLocaleString()}>
                 {stat.value}
               </p>
-              <p className="text-xs font-medium text-slate-500 dark:text-[#9198A1]">
+              <p className="text-[10px] sm:text-xs font-medium text-slate-500 truncate dark:text-[#9198A1]">
                 {stat.label}
               </p>
             </div>

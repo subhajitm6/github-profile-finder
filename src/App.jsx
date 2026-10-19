@@ -177,20 +177,20 @@ export default function App() {
       <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900 antialiased transition-colors duration-200 selection:bg-blue-100 selection:text-blue-700 dark:bg-[#0D1117] dark:text-[#E6EDF3] dark:selection:bg-blue-900/60 dark:selection:text-blue-200">
         <Header activeTab={activeTab} onTabChange={setActiveTab} />
 
-        <main className="flex-1 px-4 py-8 sm:px-6 lg:px-8">
+        <main className="flex-1 px-3 py-6 sm:px-6 sm:py-8 lg:px-8">
           <div className="mx-auto max-w-6xl">
             {activeTab === 'search' ? (
               <>
                 {/* Hero Section */}
-                <section className="mb-8 text-center sm:mb-12">
-                  <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 transition-colors sm:text-4xl md:text-5xl dark:text-[#E6EDF3]">
+                <section className="mb-6 text-center sm:mb-12">
+                  <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 transition-colors sm:text-4xl md:text-5xl dark:text-[#E6EDF3]">
                     GitHub Developer <span className="text-blue-600 dark:text-[#58A6FF]">Explorer</span>
                   </h1>
-                  <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-600 transition-colors sm:text-base md:text-lg dark:text-[#9198A1]">
+                  <p className="mx-auto mt-2 sm:mt-3 max-w-2xl text-xs text-slate-600 transition-colors sm:text-base md:text-lg dark:text-[#9198A1]">
                     Inspect profiles, filter repositories by language, compare metrics, and bookmark top developers.
                   </p>
 
-                  <div className="mt-8">
+                  <div className="mt-6 sm:mt-8">
                     <SearchForm onSearch={handleSearch} isLoading={isLoading} />
                     <RecentSearches
                       searches={recentSearches}
