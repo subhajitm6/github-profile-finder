@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, Moon, Sun, ArrowRightLeft, User } from 'lucide-react';
+import { Moon, Sun, ArrowRightLeft, User } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function Header({ activeTab, onTabChange }) {
@@ -18,16 +18,18 @@ export default function Header({ activeTab, onTabChange }) {
             }}
             title="Reload DevExplorer"
             aria-label="Reload DevExplorer"
-            className="group flex items-center gap-2 cursor-pointer select-none transition-transform active:scale-95 shrink-0"
+            className="group flex items-center cursor-pointer select-none transition-transform active:scale-95 shrink-0"
           >
-            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg bg-blue-600 text-white shadow-sm shadow-blue-500/20 transition-transform group-hover:scale-105 shrink-0">
-              <Compass className="h-4 w-4 sm:h-5 sm:w-5" />
-            </div>
-            <div>
-              <span className="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-[#E6EDF3]">
-                Dev<span className="text-blue-600 dark:text-[#58A6FF]">Explorer</span>
-              </span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="DevExplorer"
+              className="h-8 sm:h-9 w-auto object-contain block dark:hidden transition-transform group-hover:scale-105"
+            />
+            <img
+              src="/logo-dark.png"
+              alt="DevExplorer"
+              className="h-8 sm:h-9 w-auto object-contain hidden dark:block transition-transform group-hover:scale-105"
+            />
           </a>
 
           {/* Navigation Tabs */}
