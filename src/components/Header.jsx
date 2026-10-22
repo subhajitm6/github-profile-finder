@@ -23,12 +23,12 @@ export default function Header({ activeTab, onTabChange }) {
             <img
               src="/logo.png"
               alt="DevExplorer"
-              className="h-8 sm:h-9 w-auto object-contain block dark:hidden transition-transform group-hover:scale-105"
+              className="h-8 md:h-10 lg:h-11 w-auto object-contain block dark:hidden transition-transform group-hover:scale-105"
             />
             <img
               src="/logo-dark.png"
               alt="DevExplorer"
-              className="h-8 sm:h-9 w-auto object-contain hidden dark:block transition-transform group-hover:scale-105"
+              className="h-8 md:h-10 lg:h-11 w-auto object-contain hidden dark:block transition-transform group-hover:scale-105"
             />
           </a>
 
